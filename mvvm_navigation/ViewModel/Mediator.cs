@@ -6,12 +6,12 @@ namespace mvvm_navigation.ViewModel
     /// <summary>
     /// Mediates between view models
     /// </summary>
-    public static class Mediator
+    public class Mediator : IMediator
     {
-        private static readonly IDictionary<string, List<Action<object>>> actions =
+        private readonly IDictionary<string, List<Action<object>>> actions =
            new Dictionary<string, List<Action<object>>>();
 
-        public static void Subscribe(string token, Action<object> callback)
+        public void Subscribe(string token, Action<object> callback)
         {
             if (!actions.ContainsKey(token))
             {
@@ -30,13 +30,13 @@ namespace mvvm_navigation.ViewModel
             }
         }
 
-        public static void Unsubscribe(string token, Action<object> callback)
+        public void Unsubscribe(string token, Action<object> callback)
         {
             if (actions.ContainsKey(token))
                 actions[token].Remove(callback);
         }
 
-        public static void Notify(string token, object args = null)
+        public void Notify(string token, object args = null)
         {
             if (actions.ContainsKey(token))
                 foreach (var callback in actions[token])

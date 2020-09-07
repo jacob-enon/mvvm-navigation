@@ -30,12 +30,12 @@ namespace mvvm_navigation.ViewModel
         /// </summary>
         public List<BaseViewModel> ViewModels { get; }
 
-        public MainViewModel()
+        public MainViewModel() : base(new Mediator())
         {
             ViewModels = new List<BaseViewModel>()
             {
-                new Page1ViewModel(),
-                new Page2ViewModel()
+                new Page1ViewModel(Mediator),
+                new Page2ViewModel(Mediator)
             };
 
             ViewModel = ViewModels.First();
@@ -47,23 +47,11 @@ namespace mvvm_navigation.ViewModel
         private void OnNavigatePage1(object obj)
         {
             ViewModel = ViewModels[0];
-            //ChangeViewModel(ViewModels[0]);
         }
 
         private void OnNavigatePage2(object obj)
         {
             ViewModel = ViewModels[1];
-            //ChangeViewModel(ViewModels[1]);
-        }
-
-        private void ChangeViewModel(BaseViewModel viewModel)
-        {
-            if (!ViewModels.Contains(viewModel))
-            {
-                ViewModels.Add(viewModel);
-            }
-
-            ViewModel = ViewModels.FirstOrDefault(vm => vm == ViewModel);
         }
     }
 }

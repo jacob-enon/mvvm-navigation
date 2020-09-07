@@ -9,6 +9,13 @@ namespace mvvm_navigation.ViewModel
     /// <remarks> Handles OnPropertyChanged() </remarks>
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
+        protected IMediator Mediator { get; }
+
+        public BaseViewModel(IMediator mediator)
+        {
+            Mediator = mediator;
+        }
+
         #region On Property Changed Implementation
 
         public event PropertyChangedEventHandler PropertyChanged;

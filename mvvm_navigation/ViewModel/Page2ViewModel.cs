@@ -7,6 +7,8 @@ namespace mvvm_navigation.ViewModel
     /// </summary>
     public class Page2ViewModel : BaseViewModel
     {
+        public Page2ViewModel(IMediator mediator) : base(mediator) { }
+
         /// <summary>
         /// Navigate to page 1
         /// </summary>
